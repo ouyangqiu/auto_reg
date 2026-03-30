@@ -316,6 +316,8 @@ export default function Accounts() {
             smstome_country_slugs: cfg.smstome_country_slugs,
             smstome_phone_attempts: cfg.smstome_phone_attempts,
             smstome_otp_timeout_seconds: cfg.smstome_otp_timeout_seconds,
+            smstome_poll_interval_seconds: cfg.smstome_poll_interval_seconds,
+            smstome_sync_max_pages_per_country: cfg.smstome_sync_max_pages_per_country,
           },
         }),
       })

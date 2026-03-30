@@ -163,6 +163,8 @@ const TAB_ITEMS = [
           { key: 'smstome_country_slugs', label: '国家列表', placeholder: 'united-kingdom,poland' },
           { key: 'smstome_phone_attempts', label: '手机号尝试次数', placeholder: '3' },
           { key: 'smstome_otp_timeout_seconds', label: '短信等待秒数', placeholder: '45' },
+          { key: 'smstome_poll_interval_seconds', label: '轮询间隔秒数', placeholder: '5' },
+          { key: 'smstome_sync_max_pages_per_country', label: '每国同步页数', placeholder: '5' },
         ],
       },
     ],
