@@ -33,6 +33,10 @@ const SELECT_FIELDS: Record<string, { label: string; value: string }[]> = {
     { label: '本地 Solver (Camoufox)', value: 'local_solver' },
     { label: '手动', value: 'manual' },
   ],
+  codex_proxy_upload_type: [
+    { label: 'AT（Access Token，推荐）', value: 'at' },
+    { label: 'RT（Refresh Token）', value: 'rt' },
+  ],
 }
 
 const TAB_ITEMS = [
@@ -152,6 +156,15 @@ const TAB_ITEMS = [
         fields: [
           { key: 'team_manager_url', label: 'API URL', placeholder: 'https://your-tm.example.com' },
           { key: 'team_manager_key', label: 'API Key', secret: true },
+        ],
+      },
+      {
+        title: 'CodexProxy',
+        desc: '注册完成后自动上传到 CodexProxy 管理平台',
+        fields: [
+          { key: 'codex_proxy_url', label: 'API URL', placeholder: 'https://your-codex-proxy.example.com' },
+          { key: 'codex_proxy_key', label: 'Admin Key', secret: true },
+          { key: 'codex_proxy_upload_type', label: '上传类型' },
         ],
       },
     ],
