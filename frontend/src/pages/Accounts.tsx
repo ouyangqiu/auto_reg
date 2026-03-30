@@ -150,8 +150,6 @@ function ActionMenu({ acc, onRefresh }: { acc: any; onRefresh: () => void }) {
   }
 
   const handleAction = async (actionId: string) => {
-    const shouldPreopenWindow = actionId === 'payment_link'
-    const pendingWindow = shouldPreopenWindow ? window.open('', '_blank', 'noopener,noreferrer') : null
     const actionLabel = actions.find((item) => item.id === actionId)?.label || actionId
 
     try {
@@ -160,22 +158,15 @@ function ActionMenu({ acc, onRefresh }: { acc: any; onRefresh: () => void }) {
         body: JSON.stringify({ params: {} }),
       })
       if (!r.ok) {
-        pendingWindow?.close()
         showResult(actionLabel, 'error', r.error || '操作失败')
         return
       }
       const data = r.data || {}
       if (data.url || data.checkout_url || data.cashier_url) {
         const targetUrl = data.url || data.checkout_url || data.cashier_url
-        if (pendingWindow) {
-          pendingWindow.location.href = targetUrl
-        } else {
-          window.open(targetUrl, '_blank', 'noopener,noreferrer')
-        }
-        message.success('链接已打开')
-        showResult(actionLabel, 'success', '操作成功，已打开链接。', targetUrl)
+        message.success('链接已生成')
+        showResult(actionLabel, 'success', '操作成功，请在弹窗中打开或复制链接。', targetUrl)
       } else {
-        pendingWindow?.close()
         message.success(data.message || '操作成功')
         const text =
           typeof data === 'string'
@@ -187,7 +178,6 @@ function ActionMenu({ acc, onRefresh }: { acc: any; onRefresh: () => void }) {
       }
       onRefresh()
     } catch (e: any) {
-      pendingWindow?.close()
       const detail = e?.message ? String(e.message) : '请求失败'
       message.error(detail)
       showResult(actionLabel, 'error', detail)
