@@ -13,7 +13,7 @@ import logging
 
 from curl_cffi import requests as cffi_requests
 from curl_cffi.requests import Session, Response
-from .proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from .proxy_utils import build_requests_proxy_config
 
 
 logger = logging.getLogger(__name__)
@@ -57,7 +57,7 @@ class HTTPClient:
             config: 请求配置
             session: 可重用的会话对象
         """
-        self.proxy_url = normalize_proxy_url(proxy_url)
+        self.proxy_url = proxy_url
         self.config = config or RequestConfig()
         self._session = session
 

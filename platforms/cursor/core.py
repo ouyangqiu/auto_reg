@@ -2,7 +2,7 @@
 
 import re, uuid, json, urllib.parse, random, string
 from typing import Optional, Callable
-from core.proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from core.proxy_utils import build_requests_proxy_config
 
 AUTH = "https://authenticator.cursor.sh"
 CURSOR = "https://cursor.com"
@@ -49,7 +49,6 @@ class CursorRegister:
 
         self.log = log_fn
         self.s = curl_req.Session(impersonate="safari17_0")
-        proxy = normalize_proxy_url(proxy)
         if proxy:
             self.s.proxies = build_requests_proxy_config(proxy)
 

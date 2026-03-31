@@ -1,12 +1,12 @@
 """Playwright 执行器 - 支持 headless/headed 模式"""
 
 from ..base_executor import BaseExecutor, Response
-from ..proxy_utils import build_playwright_proxy_config, normalize_proxy_url
+from ..proxy_utils import build_playwright_proxy_config
 
 
 class PlaywrightExecutor(BaseExecutor):
     def __init__(self, proxy: str = None, headless: bool = True):
-        super().__init__(normalize_proxy_url(proxy))
+        super().__init__(proxy)
         self.headless = headless
         self._browser = None
         self._context = None

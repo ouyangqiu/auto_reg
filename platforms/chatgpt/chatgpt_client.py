@@ -7,7 +7,7 @@ import random
 import uuid
 import time
 from urllib.parse import urlparse
-from core.proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from core.proxy_utils import build_requests_proxy_config
 
 try:
     from curl_cffi import requests as curl_requests
@@ -83,7 +83,7 @@ class ChatGPTClient:
             verbose: 是否输出详细日志
             browser_mode: protocol | headless | headed
         """
-        self.proxy = normalize_proxy_url(proxy)
+        self.proxy = proxy
         self.verbose = verbose
         self.browser_mode = browser_mode or "protocol"
         self.device_id = str(uuid.uuid4())

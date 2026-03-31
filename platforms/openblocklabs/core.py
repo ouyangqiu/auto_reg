@@ -19,7 +19,7 @@ import re, json, time, base64, random, string, os
 from urllib.parse import urlencode, urlparse, parse_qs
 from curl_cffi import requests as curl_requests
 import requests as std_requests
-from core.proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from core.proxy_utils import build_requests_proxy_config
 
 # ─── 配置 ───────────────────────────────────────────────────────────────────
 
@@ -100,7 +100,6 @@ def _make_signals() -> str:
 # ─── Register ────────────────────────────────────────────────────────────────
 class OpenBlockLabsRegister:
     def __init__(self, proxy: str = None):
-        proxy = normalize_proxy_url(proxy)
         self.s = curl_requests.Session()
         self.s.impersonate = "chrome131"
         if proxy:

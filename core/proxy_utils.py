@@ -21,20 +21,18 @@ def normalize_proxy_url(proxy_url: Optional[str]) -> Optional[str]:
 
 
 def build_requests_proxy_config(proxy_url: Optional[str]) -> Optional[dict[str, str]]:
-    normalized = normalize_proxy_url(proxy_url)
-    if not normalized:
+    if not proxy_url:
         return None
-    return {"http": normalized, "https": normalized}
+    return {"http": proxy_url, "https": proxy_url}
 
 
 def build_playwright_proxy_config(proxy_url: Optional[str]) -> Optional[dict[str, str]]:
-    normalized = normalize_proxy_url(proxy_url)
-    if not normalized:
+    if not proxy_url:
         return None
 
-    parts = urlsplit(normalized)
+    parts = urlsplit(proxy_url)
     if not parts.scheme or not parts.hostname or parts.port is None:
-        return {"server": normalized}
+        return {"server": proxy_url}
 
     config = {"server": f"{parts.scheme}://{parts.hostname}:{parts.port}"}
     if parts.username:

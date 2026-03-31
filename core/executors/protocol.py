@@ -2,17 +2,16 @@
 
 from curl_cffi import requests as curl_requests
 from ..base_executor import BaseExecutor, Response
-from ..proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from ..proxy_utils import build_requests_proxy_config
 
 
 class ProtocolExecutor(BaseExecutor):
     def __init__(self, proxy: str = None, impersonate: str = "chrome124"):
-        normalized_proxy = normalize_proxy_url(proxy)
-        super().__init__(normalized_proxy)
+        super().__init__(proxy)
         self.s = curl_requests.Session()
         self.s.impersonate = impersonate
-        if normalized_proxy:
-            self.s.proxies = build_requests_proxy_config(normalized_proxy)
+        if proxy:
+            self.s.proxies = build_requests_proxy_config(proxy)
         self.s.headers.update(
             {
                 "user-agent": (

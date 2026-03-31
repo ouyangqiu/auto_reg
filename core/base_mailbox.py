@@ -6,7 +6,7 @@ import random
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Optional, Any
-from .proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from .proxy_utils import build_requests_proxy_config
 
 
 @dataclass
@@ -106,7 +106,6 @@ def create_mailbox(
 ) -> "BaseMailbox":
     """工厂方法：根据 provider 创建对应的 mailbox 实例"""
     extra = extra or {}
-    proxy = normalize_proxy_url(proxy)
     if provider == "tempmail_lol":
         return TempMailLolMailbox(proxy=proxy)
     elif provider == "skymail":

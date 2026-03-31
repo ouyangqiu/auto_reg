@@ -5,7 +5,7 @@ OAuth 客户端模块 - 处理 Codex OAuth 登录流程
 import time
 import secrets
 from urllib.parse import urlparse, parse_qs
-from core.proxy_utils import build_requests_proxy_config, normalize_proxy_url
+from core.proxy_utils import build_requests_proxy_config
 
 try:
     from curl_cffi import requests as curl_requests
@@ -48,7 +48,7 @@ class OAuthClient:
         self.oauth_redirect_uri = self.config.get(
             "oauth_redirect_uri", "http://localhost:1455/auth/callback"
         )
-        self.proxy = normalize_proxy_url(proxy)
+        self.proxy = proxy
         self.verbose = verbose
         self.browser_mode = browser_mode or "protocol"
         self.last_error = ""
