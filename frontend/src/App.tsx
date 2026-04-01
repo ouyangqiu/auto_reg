@@ -20,7 +20,7 @@ import Settings from '@/pages/Settings'
 import TaskHistory from '@/pages/TaskHistory'
 import Login from '@/pages/Login'
 import { darkTheme, lightTheme } from './theme'
-import { clearToken, getToken } from '@/lib/utils'
+import { apiFetch, clearToken, getToken } from '@/lib/utils'
 
 const { Sider, Content } = Layout
 
@@ -77,11 +77,11 @@ function AppContent() {
   }, [])
 
   useEffect(() => {
-    fetch('/api/platforms')
-      .then(r => r.json())
+    apiFetch('/platforms')
       .then(d => setPlatforms((d || [])
         .filter((p: any) => !['tavily', 'cursor'].includes(p.name))
         .map((p: any) => ({ key: p.name, label: p.display_name }))))
+      .catch(() => {})
   }, [])
 
   const isLight = themeMode === 'light'
