@@ -48,7 +48,7 @@ RUN pip install --upgrade pip \
     && pip install -r requirements.txt \
     && installed=0 \
     && for attempt in 1 2 3; do \
-         if python -m playwright install --with-deps chromium; then \
+         if python -m playwright install --with-deps chromium firefox; then \
            installed=1; \
            break; \
          fi; \
