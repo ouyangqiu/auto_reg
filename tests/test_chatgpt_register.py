@@ -1,7 +1,10 @@
 import unittest
 from unittest import mock
 
-from platforms.chatgpt.register import RegistrationEngine, SignupFormResult
+from platforms.chatgpt.refresh_token_registration_engine import (
+    RefreshTokenRegistrationEngine,
+    SignupFormResult,
+)
 
 
 class DummyEmailService:
@@ -16,7 +19,7 @@ class DummyEmailService:
 
 class RegistrationEngineFlowTests(unittest.TestCase):
     def _make_engine(self):
-        return RegistrationEngine(
+        return RefreshTokenRegistrationEngine(
             email_service=DummyEmailService(),
             proxy_url="http://127.0.0.1:7890",
             callback_logger=lambda msg: None,

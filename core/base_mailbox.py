@@ -988,8 +988,8 @@ class CFWorkerMailbox(BaseMailbox):
         method: str,
         path: str,
         *,
-        params: dict | None = None,
-        payload: dict | None = None,
+        params: Optional[dict] = None,
+        payload: Optional[dict] = None,
         timeout: int = 15,
     ):
         import requests

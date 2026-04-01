@@ -18,15 +18,20 @@ import {
   CloseCircleOutlined,
   LoadingOutlined,
 } from '@ant-design/icons'
+import { ChatGPTRegistrationModeSwitch } from '@/components/ChatGPTRegistrationModeSwitch'
+import { usePersistentChatGPTRegistrationMode } from '@/hooks/usePersistentChatGPTRegistrationMode'
+import { buildChatGPTRegistrationRequestAdapter } from '@/lib/chatgptRegistrationRequestAdapter'
+import { getExecutorOptions, normalizeExecutorForPlatform } from '@/lib/platformExecutorOptions'
 import { apiFetch } from '@/lib/utils'
-import { getExecutorOptions, normalizeExecutorForPlatform } from '@/lib/registerOptions'
 
 const { Text } = Typography
 
-export default function Register() {
+export default function RegisterTaskPage() {
   const [form] = Form.useForm()
   const [task, setTask] = useState<any>(null)
   const [polling, setPolling] = useState(false)
+  const { mode: chatgptRegistrationMode, setMode: setChatgptRegistrationMode } =
+    usePersistentChatGPTRegistrationMode()
 
   useEffect(() => {
     apiFetch('/config').then((cfg) => {
@@ -77,6 +82,55 @@ export default function Register() {
 
   const submit = async () => {
     const values = await form.validateFields()
+    const registerExtra = {
+      mail_provider: values.mail_provider,
+      laoudo_auth: values.laoudo_auth,
+      laoudo_email: values.laoudo_email,
+      laoudo_account_id: values.laoudo_account_id,
+      maliapi_base_url: values.maliapi_base_url,
+      maliapi_api_key: values.maliapi_api_key,
+      maliapi_domain: values.maliapi_domain,
+      maliapi_auto_domain_strategy: values.maliapi_auto_domain_strategy,
+      moemail_api_url: values.moemail_api_url,
+      skymail_api_base: values.skymail_api_base,
+      skymail_token: values.skymail_token,
+      skymail_domain: values.skymail_domain,
+      duckmail_api_url: values.duckmail_api_url,
+      duckmail_provider_url: values.duckmail_provider_url,
+      duckmail_bearer: values.duckmail_bearer,
+      freemail_api_url: values.freemail_api_url,
+      freemail_admin_token: values.freemail_admin_token,
+      freemail_username: values.freemail_username,
+      freemail_password: values.freemail_password,
+      cfworker_api_url: values.cfworker_api_url,
+      cfworker_admin_token: values.cfworker_admin_token,
+      cfworker_custom_auth: values.cfworker_custom_auth,
+      cfworker_domain_override: values.cfworker_domain_override,
+      cfworker_subdomain: values.cfworker_subdomain,
+      cfworker_random_subdomain: values.cfworker_random_subdomain,
+      cfworker_fingerprint: values.cfworker_fingerprint,
+      smstome_cookie: values.smstome_cookie,
+      smstome_country_slugs: values.smstome_country_slugs,
+      smstome_phone_attempts: values.smstome_phone_attempts,
+      smstome_otp_timeout_seconds: values.smstome_otp_timeout_seconds,
+      smstome_poll_interval_seconds: values.smstome_poll_interval_seconds,
+      smstome_sync_max_pages_per_country: values.smstome_sync_max_pages_per_country,
+      luckmail_base_url: values.luckmail_base_url,
+      luckmail_api_key: values.luckmail_api_key,
+      luckmail_email_type: values.luckmail_email_type,
+      luckmail_domain: values.luckmail_domain,
+      yescaptcha_key: values.yescaptcha_key,
+      solver_url: values.solver_url,
+    }
+    const chatgptRegistrationRequestAdapter =
+      buildChatGPTRegistrationRequestAdapter(
+        values.platform,
+        chatgptRegistrationMode,
+      )
+    const adaptedRegisterExtra = chatgptRegistrationRequestAdapter
+      ? chatgptRegistrationRequestAdapter.extendExtra(registerExtra)
+      : registerExtra
+
     const res = await apiFetch('/tasks/register', {
       method: 'POST',
       body: JSON.stringify({
@@ -88,46 +142,7 @@ export default function Register() {
         proxy: values.proxy || null,
         executor_type: values.executor_type,
         captcha_solver: values.captcha_solver,
-        extra: {
-          mail_provider: values.mail_provider,
-          laoudo_auth: values.laoudo_auth,
-          laoudo_email: values.laoudo_email,
-          laoudo_account_id: values.laoudo_account_id,
-          maliapi_base_url: values.maliapi_base_url,
-          maliapi_api_key: values.maliapi_api_key,
-          maliapi_domain: values.maliapi_domain,
-          maliapi_auto_domain_strategy: values.maliapi_auto_domain_strategy,
-          moemail_api_url: values.moemail_api_url,
-          skymail_api_base: values.skymail_api_base,
-          skymail_token: values.skymail_token,
-          skymail_domain: values.skymail_domain,
-          duckmail_api_url: values.duckmail_api_url,
-          duckmail_provider_url: values.duckmail_provider_url,
-          duckmail_bearer: values.duckmail_bearer,
-          freemail_api_url: values.freemail_api_url,
-          freemail_admin_token: values.freemail_admin_token,
-          freemail_username: values.freemail_username,
-          freemail_password: values.freemail_password,
-          cfworker_api_url: values.cfworker_api_url,
-          cfworker_admin_token: values.cfworker_admin_token,
-          cfworker_custom_auth: values.cfworker_custom_auth,
-          cfworker_domain_override: values.cfworker_domain_override,
-          cfworker_subdomain: values.cfworker_subdomain,
-          cfworker_random_subdomain: values.cfworker_random_subdomain,
-          cfworker_fingerprint: values.cfworker_fingerprint,
-          smstome_cookie: values.smstome_cookie,
-          smstome_country_slugs: values.smstome_country_slugs,
-          smstome_phone_attempts: values.smstome_phone_attempts,
-          smstome_otp_timeout_seconds: values.smstome_otp_timeout_seconds,
-          smstome_poll_interval_seconds: values.smstome_poll_interval_seconds,
-          smstome_sync_max_pages_per_country: values.smstome_sync_max_pages_per_country,
-          luckmail_base_url: values.luckmail_base_url,
-          luckmail_api_key: values.luckmail_api_key,
-          luckmail_email_type: values.luckmail_email_type,
-          luckmail_domain: values.luckmail_domain,
-          yescaptcha_key: values.yescaptcha_key,
-          solver_url: values.solver_url,
-        },
+        extra: adaptedRegisterExtra,
       }),
     })
     setTask(res)
@@ -219,6 +234,14 @@ export default function Register() {
               <Input placeholder="http://user:pass@host:port" />
             </Form.Item>
           </Space>
+          {platform === 'chatgpt' && (
+            <Form.Item label="ChatGPT Token 方案">
+              <ChatGPTRegistrationModeSwitch
+                mode={chatgptRegistrationMode}
+                onChange={setChatgptRegistrationMode}
+              />
+            </Form.Item>
+          )}
         </Card>
 
         <Card title="邮箱配置" style={{ marginBottom: 16 }}>

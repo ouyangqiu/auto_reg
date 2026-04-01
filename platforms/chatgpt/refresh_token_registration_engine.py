@@ -82,7 +82,7 @@ class SignupFormResult:
     error_message: str = ""
 
 
-class RegistrationEngine:
+class RefreshTokenRegistrationEngine:
     """
     注册引擎
     负责协调邮箱服务、OAuth 流程和 OpenAI API 调用
@@ -978,3 +978,7 @@ class RegistrationEngine:
             return False
 
         return True  # 由 account_manager 统一处理存库
+
+
+# 兼容旧命名，逐步迁移到更见名知意的类名。
+RegistrationEngine = RefreshTokenRegistrationEngine
