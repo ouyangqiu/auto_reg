@@ -27,6 +27,7 @@
 - [项目结构](#项目结构)
 - [Electron 开发说明](#electron-开发说明)
 - [License](#license)
+- [用户讨论群](#用户讨论群)
 - [Star History](#star-history)
 
 ## 项目简介
@@ -517,6 +518,10 @@ Electron 开发模式不会自动启动 Python 后端。
 ## License
 
 MIT License — 仅供学习研究，禁止商业使用。
+
+## 用户讨论群
+
+- QQ群：**1065114376**（any-auto-register 注册机用户讨论群）
 
 ## Star History
 
