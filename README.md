@@ -127,7 +127,7 @@ Kiro 当前风控较严格，邮箱方案会显著影响成功率。当前项目
 
 ## Quick Start
 
-### 1. 创建并激活 Conda 环境
+### 1. Create and Activate Conda Environment
 
 1. **Clone the repository**
 ```bash
