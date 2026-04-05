@@ -10,6 +10,7 @@ import {
   ClockCircleOutlined,
   SunOutlined,
   MoonOutlined,
+  ThunderboltOutlined,
 } from '@ant-design/icons'
 import zhCN from 'antd/locale/zh_CN'
 import Dashboard from '@/pages/Dashboard'
@@ -19,6 +20,7 @@ import ScheduledTasks from '@/pages/ScheduledTasks'
 import Proxies from '@/pages/Proxies'
 import Settings from '@/pages/Settings'
 import TaskHistory from '@/pages/TaskHistory'
+import Contribution from '@/pages/Contribution'
 import { darkTheme, lightTheme } from './theme'
 
 const { Sider, Content } = Layout
@@ -59,6 +61,7 @@ function AppContent() {
     if (path === '/history') return ['/history']
     if (path === '/proxies') return ['/proxies']
     if (path === '/settings') return ['/settings']
+    if (path === '/contribution') return ['/contribution']
     return ['/']
   }
 
@@ -91,6 +94,11 @@ function AppContent() {
       key: '/proxies',
       icon: <GlobalOutlined />,
       label: '代理管理',
+    },
+    {
+      key: '/contribution',
+      icon: <ThunderboltOutlined />,
+      label: '贡献',
     },
     {
       key: '/settings',
@@ -184,6 +192,7 @@ function AppContent() {
             <Route path="/scheduled" element={<ScheduledTasks />} />
             <Route path="/history" element={<TaskHistory />} />
             <Route path="/proxies" element={<Proxies />} />
+            <Route path="/contribution" element={<Contribution />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </Content>
