@@ -471,3 +471,90 @@ def test_cpa_connection(api_url: str, api_token: str, proxy: str = None) -> Tupl
         return False, "连接超时，请检查网络配置"
     except Exception as e:
         return False, f"连接测试失败: {str(e)}"
+
+
+def upload_to_contribution(
+    token_data: dict,
+    api_url: str = None,
+    api_key: str = None,
+    proxy: str = None,
+) -> Tuple[bool, str]:
+    """上传单个账号到 Contribution 平台（使用 X-Public-Key 认证）。
+    api_url / api_key 为空时自动从 ConfigStore 读取。"""
+    from core.config_store import ConfigStore
+    
+    config = ConfigStore()
+    
+    if not api_url:
+        api_url = config.get("contribution_api_url")
+    if not api_key:
+        api_key = config.get("contribution_api_key")
+    if not api_url:
+        return False, "Contribution API URL 未配置"
+    if not api_key:
+        return False, "Contribution API Key 未配置"
+
+    # 尝试多个端点路径
+    endpoints = [
+        "/v0/management/auth-files",
+        "/api/contribution/upload",
+    ]
+    
+    filename = f"{token_data['email']}.json"
+    file_content = json.dumps(token_data, ensure_ascii=False, indent=2).encode("utf-8")
+
+    # 构建代理配置
+    proxies = None
+    if proxy:
+        proxies = {"http": proxy, "https": proxy}
+
+    last_error = ""
+    for endpoint in endpoints:
+        upload_url = f"{api_url.rstrip('/')}{endpoint}"
+        
+        headers = {
+            "X-Public-Key": api_key,
+        }
+
+        mime = None
+        try:
+            mime = CurlMime()
+            mime.addpart(
+                name="file",
+                data=file_content,
+                filename=filename,
+                content_type="application/json",
+            )
+
+            response = cffi_requests.post(
+                upload_url,
+                multipart=mime,
+                headers=headers,
+                proxies=proxies,
+                verify=False,
+                timeout=30,
+                impersonate="chrome110",
+            )
+
+            if response.status_code in (200, 201):
+                return True, f"上传成功 ({endpoint})"
+
+            error_msg = f"上传失败: HTTP {response.status_code}"
+            try:
+                error_detail = response.json()
+                if isinstance(error_detail, dict):
+                    error_msg = error_detail.get("error", error_detail.get("message", error_msg))
+            except Exception:
+                error_msg = f"{error_msg} - {response.text[:200]}"
+            
+            last_error = f"{endpoint}: {error_msg}"
+            logger.warning(f"Contribution 上传失败 [{endpoint}]: {error_msg}")
+
+        except Exception as e:
+            last_error = f"{endpoint}: {str(e)}"
+            logger.warning(f"Contribution 上传异常 [{endpoint}]: {e}")
+        finally:
+            if mime:
+                mime.close()
+
+    return False, f"所有端点均失败: {last_error}"

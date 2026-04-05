@@ -225,6 +225,14 @@ class ChatGPTPlatform(BasePlatform):
                     {"key": "api_key", "label": "Admin Key", "type": "text"},
                 ],
             },
+            {
+                "id": "upload_contribution",
+                "label": "上传 Contribution",
+                "params": [
+                    {"key": "api_url", "label": "Contribution API URL", "type": "text"},
+                    {"key": "api_key", "label": "Public Key", "type": "text"},
+                ],
+            },
         ]
 
     def execute_action(self, action_id: str, account: Account, params: dict) -> dict:
@@ -374,6 +382,17 @@ class ChatGPTPlatform(BasePlatform):
                     api_url=params.get("api_url"),
                     api_key=params.get("api_key"),
                 )
+            return {"ok": ok, "data": msg}
+
+        if action_id == "upload_contribution":
+            from platforms.chatgpt.cpa_upload import generate_token_json, upload_to_contribution
+
+            token_data = generate_token_json(a)
+            ok, msg = upload_to_contribution(
+                token_data,
+                api_url=params.get("api_url"),
+                api_key=params.get("api_key"),
+            )
             return {"ok": ok, "data": msg}
 
         raise NotImplementedError(f"未知操作: {action_id}")
