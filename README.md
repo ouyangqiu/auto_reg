@@ -7,167 +7,169 @@
 </p>
 
 <p align="center">
-  <a href="README_CN.md">🇨🇳 中文版本</a>
+  <a href="README.md">🇬🇧 English Version</a>
 </p>
 
 ---
 
-## 🙏 Acknowledgments
+## 🙏 致谢
 
-This project is a third-generation fork based on the following outstanding open-source projects. We sincerely thank the original authors for their contributions:
+本项目是在以下优秀开源项目基础上的三开版本，在此衷心感谢原作者们的贡献：
 
-- **Original Project (1st Gen)**: [lxf746/any-auto-register](https://github.com/lxf746/any-auto-register) by @lxf746
-- **Second Fork (2nd Gen)**: [zc-zhangchen/any-auto-register](https://github.com/zc-zhangchen/any-auto-register) by @zc-zhangchen
-- **Temporary Email Solution**: [dreamhunter2333/cloudflare_temp_email](https://github.com/dreamhunter2333/cloudflare_temp_email)
+- **一开项目**：[lxf746/any-auto-register](https://github.com/lxf746/any-auto-register) by @lxf746
+- **二开项目**：[zc-zhangchen/any-auto-register](https://github.com/zc-zhangchen/any-auto-register) by @zc-zhangchen
+- **临时邮箱方案**：[dreamhunter2333/cloudflare_temp_email](https://github.com/dreamhunter2333/cloudflare_temp_email)
 
----
-
-## ⚠️ Disclaimer
-
-**This project is for learning and research purposes only. It shall not be used for any commercial or illegal purposes.**
-
-- **Purpose Limitation**: This project is solely for learning and technical research. It shall not be used for any commercial or illegal purposes.
-- **Legal Liability**: All consequences arising from the use of this project shall be borne by the user. The author is not responsible for any losses, legal liabilities, or moral disputes caused by the use of this project.
-- **Compliance**: Please ensure your use complies with local laws and regulations and the terms of service of each platform.
-- **Risk Assumption**: Using this project for account registration may violate the terms of service of relevant platforms. Risks such as account bans and IP bans resulting therefrom shall be borne by the user.
-- **Author's Stance**: The author firmly opposes any misuse of this project, including but not limited to mass account registration for fraud, harassment, spam dissemination, and other illegal activities.
+本项目在前作基础上进行了功能扩展和优化。
 
 ---
 
-## 📋 Table of Contents
+## ⚠️ 免责声明
 
-- [Introduction](#-introduction)
-- [Features](#-features)
-- [Supported Platforms](#-supported-platforms)
-- [Tech Stack](#-tech-stack)
-- [Quick Start](#-quick-start)
-- [Configuration](#-configuration)
-- [Email Services](#-email-services)
-- [Captcha Services](#-captcha-services)
-- [Usage Guide](#-usage-guide)
-  - [Register Accounts](#register-accounts)
-  - [Scheduled Tasks](#scheduled-tasks)
-  - [Batch Upload](#batch-upload)
-  - [Delete Accounts](#delete-accounts)
-  - [One-Click Update](#one-click-update)
-- [Project Structure](#-project-structure)
-- [API Documentation](#-api-documentation)
-- [Troubleshooting](#-troubleshooting)
-- [Development Guide](#-development-guide)
-- [Docker Deployment](#-docker-deployment)
-- [Contributing](#-contributing)
-- [License](#-license)
+**请务必在使用本项目前仔细阅读以下声明：**
+
+1. **用途限制**：本项目仅供学习和技术研究使用，不得用于任何商业用途或非法用途。
+2. **法律责任**：使用本项目所产生的一切后果由使用者自行承担。作者不对因使用本项目而导致的任何损失、法律责任或道德纠纷负责。
+3. **合规使用**：请确保您的使用行为符合当地法律法规以及各平台的服务条款。
+4. **风险自担**：使用本项目进行账号注册可能违反相关平台的服务条款，由此导致的账号封禁、IP 封禁等风险由使用者自行承担。
+5. **作者立场**：本项目作者坚决反对任何滥用本项目的行为，包括但不限于批量注册账号进行诈骗、骚扰、垃圾信息传播等违法行为。
+
+---
+
+## 📋 目录
+
+- [项目简介](#-项目简介)
+- [功能特性](#-功能特性)
+- [支持平台](#-支持平台)
+- [技术栈](#-技术栈)
+- [快速开始](#-快速开始)
+- [配置说明](#-配置说明)
+- [邮箱服务](#-邮箱服务)
+- [验证码服务](#-验证码服务)
+- [使用指南](#-使用指南)
+  - [注册账号](#注册账号)
+  - [定时任务](#定时任务)
+  - [批量上传](#批量上传)
+  - [删除账号](#删除账号)
+  - [一键更新](#一键更新)
+- [项目结构](#-项目结构)
+- [API 文档](#-api-文档)
+- [常见问题](#-常见问题)
+- [开发指南](#-开发指南)
+- [Docker 部署](#-docker-部署)
+- [贡献指南](#-贡献指南)
+- [许可证](#-许可证)
 - [Star History](#-star-history)
 
 ---
 
-## 📖 Introduction
+## 📖 项目简介
 
-**Any Auto Register** is a multi-platform account automatic registration and management system with plugin-based extension, built-in Web UI, and automatic handling of captcha and email verification.
+**Any Auto Register** 是一个多平台账号自动注册与管理系统，支持插件化扩展，内置 Web UI，可自动处理验证码和邮箱验证。
 
-### ✨ Features
+### ✨ 功能特性
 
-- 🎯 **Multi-Platform Support**: ChatGPT, Trae.ai, Cursor, Kiro, Grok, Tavily, OpenBlockLabs, and more
-- 🔌 **Plugin Architecture**: Easy to extend new platforms with standardized interfaces
-- 📧 **Email Services**: Support for 10+ temporary email and self-hosted email services
-- 🤖 **Captcha Handling**: Integrated YesCaptcha and local Turnstile Solver
-- 🌐 **Proxy Support**: Built-in proxy pool management for better anonymity
-- 📊 **Web UI**: Beautiful and easy-to-use management interface
-- 🔄 **Scheduled Tasks**: Support for automatic scheduled registration
-- 📈 **Batch Operations**: Support for batch registration (up to 1000 accounts) and batch upload
-- ⚡ **Random Delay**: Configurable registration interval with random delay
-- 🚀 **One-Click Deployment**: Automated deployment and update scripts
+- 🎯 **多平台支持**：ChatGPT、Trae.ai、Cursor、Kiro、Grok、Tavily、OpenBlockLabs 等
+- 🔌 **插件化架构**：易于通过标准化接口扩展新平台
+- 📧 **邮箱服务**：支持 10+ 种临时邮箱和自建邮箱服务
+- 🤖 **验证码处理**：集成 YesCaptcha 和本地 Turnstile Solver
+- 🌐 **代理支持**：内置代理池管理，更好的匿名性
+- 📊 **Web 管理界面**：美观易用的管理后台
+- 🔄 **定时任务**：支持定时自动注册
+- 📈 **批量操作**：支持批量注册（最多 1000 个）和批量上传
+- ⚡ **随机延迟**：可配置的注册间隔随机延迟
+- 🚀 **一键部署**：自动化部署和更新脚本
 
 ---
 
-## 🌐 Supported Platforms
+## 🌐 支持平台
 
-| Platform | Registration | Token Management | Status Sync | Notes |
-|----------|--------------|------------------|-------------|-------|
-| **ChatGPT** | ✅ | ✅ | ✅ | Full feature support |
+| 平台 | 注册 | Token 管理 | 状态同步 | 说明 |
+|------|------|-----------|---------|------|
+| **ChatGPT** | ✅ | ✅ | ✅ | 完整功能支持 |
 | **Trae.ai** | ✅ | ✅ | ❌ | |
 | **Cursor** | ✅ | ✅ | ❌ | |
-| **Kiro** | ✅ | ✅ | ❌ | Requires self-hosted email |
+| **Kiro** | ✅ | ✅ | ❌ | 需使用自建邮箱 |
 | **Grok** | ✅ | ✅ | ❌ | |
 | **Tavily** | ✅ | ❌ | ❌ | |
 | **OpenBlockLabs** | ✅ | ❌ | ❌ | |
 
 ---
 
-## 🛠️ Tech Stack
+## 🛠️ 技术栈
 
-### Backend
-- **Framework**: FastAPI + Uvicorn
-- **Database**: SQLite + SQLModel
-- **Browser Automation**: Playwright + Camoufox
-- **HTTP Client**: curl_cffi + httpx
-- **Task Scheduling**: APScheduler
+### 后端
+- **框架**: FastAPI + Uvicorn
+- **数据库**: SQLite + SQLModel
+- **浏览器自动化**: Playwright + Camoufox
+- **HTTP 客户端**: curl_cffi + httpx
+- **任务调度**: APScheduler
 
-### Frontend
-- **Framework**: React + TypeScript
-- **UI Library**: Ant Design
-- **Build Tool**: Vite
-- **State Management**: Zustand
+### 前端
+- **框架**: React + TypeScript
+- **UI 库**: Ant Design
+- **构建工具**: Vite
+- **状态管理**: Zustand
 
-### Infrastructure
-- **Container**: Docker + Docker Compose
-- **Environment**: Conda (recommended) or venv
+### 基础设施
+- **容器化**: Docker + Docker Compose
+- **环境管理**: Conda（推荐）或 venv
 
 ---
 
-## 🚀 Quick Start
+## 🚀 快速开始
 
-### Prerequisites
+### 环境要求
 
-- **Python**: 3.12 or higher
-- **Node.js**: 18 or higher
-- **Conda**: Recommended for environment management
-- **Git**: For cloning the repository
+- **Python**: 3.12 或更高版本
+- **Node.js**: 18 或更高版本
+- **Conda**: 推荐用于环境管理
+- **Git**: 用于克隆仓库
 
-### Method 1: One-Click Deployment (Recommended)
+### 方法一：一键部署（推荐）
 
 ```bash
-# 1. Clone the repository
+# 1. 克隆项目
 git clone https://github.com/dsclca12/auto_reg.git
 cd auto_reg
 
-# 2. Run deployment script
+# 2. 执行部署脚本
 ./deploy.sh
 ```
 
-After deployment, access http://localhost:8000
+部署完成后访问 http://localhost:8000
 
-### Method 2: Manual Installation
+### 方法二：手动安装
 
-#### 1. Clone the Repository
+#### 1. 克隆项目
 ```bash
 git clone https://github.com/dsclca12/auto_reg.git
 cd auto_reg
 ```
 
-#### 2. Create Python Environment
+#### 2. 创建 Python 环境
 ```bash
-# Using Conda (recommended)
+# 使用 Conda（推荐）
 conda create -n any-auto-register python=3.12 -y
 conda activate any-auto-register
 
-# Or using venv
+# 或使用 venv
 python3 -m venv any-auto-register-env
 source any-auto-register-env/bin/activate  # Linux/Mac
 ```
 
-#### 3. Install Dependencies
+#### 3. 安装依赖
 ```bash
 pip install -r requirements.txt
 ```
 
-#### 4. Install Browsers
+#### 4. 安装浏览器
 ```bash
 python -m playwright install chromium
 python -m camoufox fetch
 ```
 
-#### 5. Install Frontend Dependencies
+#### 5. 安装前端依赖
 ```bash
 cd frontend
 npm install
@@ -175,303 +177,303 @@ npm run build
 cd ..
 ```
 
-#### 6. Configure Environment Variables
+#### 6. 配置环境变量
 ```bash
 cp .env.example .env
-# Edit .env file with your configuration
+# 编辑 .env 文件，填入你的配置
 ```
 
-#### 7. Start the Service
+#### 7. 启动服务
 ```bash
 python main.py
 ```
 
-Access http://localhost:8000
+访问 http://localhost:8000
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 配置说明
 
-### Environment Variables
+### 环境变量
 
-Copy `.env.example` to `.env` and configure as needed:
+复制 `.env.example` 到 `.env` 并按需配置：
 
 ```bash
-# Server Configuration
+# 服务器配置
 HOST=0.0.0.0
 PORT=8000
 APP_RELOAD=0
 APP_CONDA_ENV=any-auto-register
 
-# Captcha Services
+# 验证码服务
 YESCAPTCHA_CLIENT_KEY=your_client_key
 LOCAL_SOLVER_URL=http://127.0.0.1:8889
 
-# Proxy (Optional)
+# 代理（可选）
 PROXY_URL=http://username:password@ip:port
 
-# Email Services (Configure based on your needs)
+# 邮箱服务（根据需要配置）
 MOEMAIL_API_KEY=your_api_key
 SKYMAIL_API_KEY=your_api_key
 SKYMAIL_DOMAIN=your_domain
 ```
 
-### Email Services
+### 邮箱服务
 
-| Service | Identifier | Description | Configuration Required |
-|---------|------------|-------------|----------------------|
-| **LuckMail** | `luckmail` | Temporary email service with API-based access | Yes |
-| **MoeMail** | `moemail` | Default option, auto-register temporary email | Yes |
-| **TempMail.lol** | `tempmail_lol` | Temporary email, may require proxy in some regions | No |
-| **SkyMail (CloudMail)** | `skymail` | Use via API/Token/Domain | Yes |
-| **YYDS Mail / MaliAPI** | `maliapi` | Support domain and auto-domain strategy | Yes |
-| **GPTMail** | `gptmail` | Generate temporary email via GPTMail API | Yes |
-| **DuckMail** | `duckmail` | Temporary email service | Yes |
-| **Freemail** | `freemail` | Self-hosted email service | Yes |
-| **Laoudo** | `laoudo` | Fixed email service | Yes |
-| **CF Worker** | `cfworker` | Self-hosted Cloudflare Worker email | Yes |
+| 服务 | 标识 | 说明 | 需要配置 |
+|------|------|------|---------|
+| **LuckMail** | `luckmail` | 基于 API 的临时邮箱服务 | 是 |
+| **MoeMail** | `moemail` | 默认选项，自动注册临时邮箱 | 是 |
+| **TempMail.lol** | `tempmail_lol` | 临时邮箱，部分地区可能需要代理 | 否 |
+| **SkyMail (CloudMail)** | `skymail` | 通过 API/Token/域名使用 | 是 |
+| **YYDS Mail / MaliAPI** | `maliapi` | 支持域名和自动域名策略 | 是 |
+| **GPTMail** | `gptmail` | 通过 GPTMail API 生成临时邮箱 | 是 |
+| **DuckMail** | `duckmail` | 临时邮箱服务 | 是 |
+| **Freemail** | `freemail` | 自建邮箱服务 | 是 |
+| **Laoudo** | `laoudo` | 固定邮箱服务 | 是 |
+| **CF Worker** | `cfworker` | 自建 Cloudflare Worker 邮箱 | 是 |
 
-#### 📧 Kiro Email Requirements
+#### 📧 Kiro 邮箱要求
 
-Kiro has strict risk control. Email solution significantly affects success rate:
+Kiro 风控严格，邮箱方案显著影响成功率：
 
-- **Self-hosted email**: 100% success rate ✅
-- **Built-in temporary email**: 0% success rate ❌
+- **自建邮箱**：100% 成功率 ✅
+- **内置临时邮箱**：0% 成功率 ❌
 
-**Recommendation**: Use self-hosted email (CF Worker, SkyMail) for Kiro registration.
+**建议**：Kiro 注册使用自建邮箱（CF Worker、SkyMail）。
 
-### Captcha Services
+### 验证码服务
 
-| Service | Description | Configuration |
-|---------|-------------|---------------|
-| **YesCaptcha** | Third-party captcha solving service | Requires Client Key |
-| **Local Solver** | Built-in Turnstile solver (camoufox + quart) | Auto-starts with backend |
+| 服务 | 说明 | 配置 |
+|------|------|------|
+| **YesCaptcha** | 第三方验证码解决服务 | 需要 Client Key |
+| **本地 Solver** | 内置 Turnstile 解决器（camoufox + quart） | 随后端自动启动 |
 
-### External System Integration
+### 外部系统集成
 
-| System | Description | Configuration |
-|--------|-------------|---------------|
-| **CPA** | Codex Protocol API management panel | API URL + Key |
-| **Sub2API** | API transit management | API URL + Key |
-| **Team Manager** | Team management | - |
-| **grok2api** | Grok token management | API URL + Key |
+| 系统 | 说明 | 配置 |
+|------|------|------|
+| **CPA** | Codex Protocol API 管理面板 | API URL + Key |
+| **Sub2API** | API 中转管理 | API URL + Key |
+| **Team Manager** | 团队管理 | - |
+| **grok2api** | Grok token 管理 | API URL + Key |
 
 ---
 
-## 📚 Usage Guide
+## 📚 使用指南
 
-### Register Accounts
+### 注册账号
 
-1. Visit **Register Task** page
-2. Select platform and configuration
-3. Set batch quantity (max 1000) and delay
-4. Click **Start Registration**
+1. 访问 **注册任务** 页面
+2. 选择平台和配置
+3. 设置批量数量（最大 1000 个）和延迟
+4. 点击 **开始注册**
 
-### Scheduled Tasks
+### 定时任务
 
-1. Visit **Scheduled Tasks** page
-2. Create task and set execution time
-3. Supports one-time and recurring execution
-4. System will automatically execute at scheduled time
-5. Supports pause/resume
+1. 访问 **定时任务** 页面
+2. 创建任务并设置执行时间
+3. 支持单次和循环执行
+4. 系统会在预定时间自动执行
+5. 支持暂停/恢复
 
-### Batch Upload
+### 批量上传
 
-1. Visit **Account Management**
-2. Select platform
-3. Select accounts (all or specific)
-4. Click **Batch Upload** to Sub2API/CPA
+1. 访问 **账号管理**
+2. 选择平台
+3. 选择账号（全选或指定）
+4. 点击 **批量上传** 到 Sub2API/CPA
 
-### ChatGPT Token Modes
+### ChatGPT Token 模式
 
-The frontend provides two ChatGPT registration modes:
+前端提供两种 ChatGPT 注册模式：
 
-| Mode | Description | Output | Recommendation |
-|------|-------------|--------|----------------|
-| **With Refresh Token** | Uses new PR flow | Access Token + Refresh Token | ✅ Recommended |
-| **Without Refresh Token** | Legacy flow | Access Token / Session only | ⚠️ RT-dependent features unavailable |
+| 模式 | 说明 | 输出 | 推荐 |
+|------|------|------|------|
+| **带 Refresh Token** | 使用新 PR 流程 | Access Token + Refresh Token | ✅ 推荐 |
+| **不带 Refresh Token** | 旧流程 | 仅 Access Token / Session | ⚠️ RT 相关功能不可用 |
 
-**Location**: Registration Task Page or ChatGPT Platform Registration Dialog
+**位置**：注册任务页面或 ChatGPT 平台注册对话框
 
-### ChatGPT Batch Operations
+### ChatGPT 批量操作
 
-Available at the top of ChatGPT platform list:
+在 ChatGPT 平台列表顶部可用：
 
-- **Status Sync**
-  - Sync selected accounts' local status
-  - Sync selected accounts' CLIProxyAPI status
-  - Or batch execute on current filter results
+- **状态同步**
+  - 同步所选账号本地状态
+  - 同步所选账号 CLIProxyAPI 状态
+  - 或对当前筛选结果批量执行
 
-- **Re-upload Undiscovered**
-  - Re-upload auth-file not found remotely
-  - Supports "current filter scope" or "currently selected accounts"
+- **补传远端未发现**
+  - 补传远端未发现的 auth-file
+  - 支持"当前筛选范围"或"当前所选账号"两种作用范围
 
-### Delete Accounts
+### 删除账号
 
-1. Navigate to **Account Management** page
-2. Select accounts to delete (single or multiple selection)
-3. Click **Delete** button to confirm deletion
-4. Supports batch deletion of multiple selected accounts
+1. 访问 **账号管理** 页面
+2. 选择要删除的账号（可单选或批量选择）
+3. 点击 **删除** 按钮确认删除
+4. 支持批量删除选中的多个账号
 
-### One-Click Update
+### 一键更新
 
-The project provides a quick update script to pull code, update dependencies, and restart the service in one go:
+项目提供了快速更新脚本，可一键完成代码拉取、依赖更新和服务重启：
 
 ```bash
-# Run in the project root directory
+# 在项目根目录下执行
 ./update.sh
 ```
 
-The script will automatically:
-1. Stop the currently running service
-2. Pull the latest code
-3. Update Python dependencies
-4. Update frontend dependencies and rebuild
-5. Prompt whether to start the service
+脚本会自动完成以下操作：
+1. 停止当前运行的服务
+2. 拉取最新代码
+3. 更新 Python 依赖
+4. 更新前端依赖并重新构建
+5. 询问是否立即启动服务
 
-> **Note**: The script uses Conda environment by default. If using venv, activate your environment first and manually perform the update steps.
+> **注意**：脚本默认使用 Conda 环境。如使用 venv，请先激活环境后手动执行更新步骤。
 
 ---
 
-## 📁 Project Structure
+## 📁 项目结构
 
 ```
 auto_reg/
-├── api/                    # API routes
-│   ├── accounts.py        # Account management APIs
-│   ├── tasks.py           # Task management APIs
-│   ├── platforms.py       # Platform APIs
-│   ├── proxies.py         # Proxy management APIs
-│   ├── config.py          # Configuration APIs
-│   ├── actions.py         # Action APIs
-│   └── integrations.py    # External integration APIs
-├── core/                   # Core logic
-│   ├── db.py              # Database initialization
-│   ├── registry.py        # Platform registry
-│   ├── scheduler.py       # Task scheduler
-│   └── config_store.py    # Configuration storage
-├── platforms/              # Platform plugins
-│   ├── chatgpt/           # ChatGPT platform
-│   ├── trae/              # Trae.ai platform
-│   ├── cursor/            # Cursor platform
-│   ├── kiro/              # Kiro platform
-│   └── ...                # Other platforms
-├── services/               # Service layer
-│   ├── email_services/    # Email service implementations
-│   ├── solver_manager.py  # Captcha solver management
-│   └── chatgpt_sync.py    # ChatGPT sync service
-├── frontend/               # Frontend code
-│   ├── src/               # Source code
-│   └── dist/              # Build artifacts
-├── static/                 # Frontend build output
-├── scripts/                # Utility scripts
-├── docker/                 # Docker configuration
-├── main.py                 # Entry point
-├── requirements.txt        # Python dependencies
-├── deploy.sh               # One-click deployment script
-├── update.sh               # Quick update script
-├── .env.example            # Configuration example
-└── README.md               # Project documentation
+├── api/                    # API 路由
+│   ├── accounts.py        # 账号管理 API
+│   ├── tasks.py           # 任务管理 API
+│   ├── platforms.py       # 平台 API
+│   ├── proxies.py         # 代理管理 API
+│   ├── config.py          # 配置 API
+│   ├── actions.py         # 操作 API
+│   └── integrations.py    # 外部集成 API
+├── core/                   # 核心逻辑
+│   ├── db.py              # 数据库初始化
+│   ├── registry.py        # 平台注册表
+│   ├── scheduler.py       # 任务调度器
+│   └── config_store.py    # 配置存储
+├── platforms/              # 平台插件
+│   ├── chatgpt/           # ChatGPT 平台
+│   ├── trae/              # Trae.ai 平台
+│   ├── cursor/            # Cursor 平台
+│   ├── kiro/              # Kiro 平台
+│   └── ...                # 其他平台
+├── services/               # 服务层
+│   ├── email_services/    # 邮箱服务实现
+│   ├── solver_manager.py  # 验证码解决器管理
+│   └── chatgpt_sync.py    # ChatGPT 同步服务
+├── frontend/               # 前端代码
+│   ├── src/               # 源代码
+│   └── dist/              # 构建产物
+├── static/                 # 前端构建输出
+├── scripts/                # 工具脚本
+├── docker/                 # Docker 配置
+├── main.py                 # 入口文件
+├── requirements.txt        # Python 依赖
+├── deploy.sh               # 一键部署脚本
+├── update.sh               # 快速更新脚本
+├── .env.example            # 配置示例
+└── README.md               # 项目文档
 ```
 
 ---
 
-## 📡 API Documentation
+## 📡 API 文档
 
-After starting the service, access http://localhost:8000/docs for interactive API documentation (Swagger UI).
+启动服务后访问 http://localhost:8000/docs 查看交互式 API 文档（Swagger UI）。
 
-### Key Endpoints
+### 主要端点
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/accounts` | GET/POST | Account management |
-| `/api/tasks` | GET/POST | Task management |
-| `/api/platforms` | GET | List supported platforms |
-| `/api/proxies` | GET/POST | Proxy management |
-| `/api/config` | GET/PUT | Configuration management |
-| `/api/actions` | POST | Execute actions |
-| `/api/integrations` | GET/POST | External integrations |
-| `/api/solver/status` | GET | Solver status |
-| `/api/solver/restart` | POST | Restart solver |
+| 端点 | 方法 | 说明 |
+|------|------|------|
+| `/api/accounts` | GET/POST | 账号管理 |
+| `/api/tasks` | GET/POST | 任务管理 |
+| `/api/platforms` | GET | 列出支持的平台 |
+| `/api/proxies` | GET/POST | 代理管理 |
+| `/api/config` | GET/PUT | 配置管理 |
+| `/api/actions` | POST | 执行操作 |
+| `/api/integrations` | GET/POST | 外部集成 |
+| `/api/solver/status` | GET | Solver 状态 |
+| `/api/solver/restart` | POST | 重启 Solver |
 
 ---
 
-## 🔧 Troubleshooting
+## 🔧 常见问题
 
-### Turnstile Solver Not Running
+### Turnstile Solver 未运行
 
-**Symptoms**: Captcha verification fails, solver status shows offline
+**症状**：验证码验证失败，Solver 状态显示离线
 
-**Solutions**:
-1. Check if backend is started correctly
-2. Ensure running in correct Python environment (Conda env recommended)
-3. Verify camoufox is installed: `python -m camoufox fetch`
-4. Check solver logs in `backend.log`
+**解决方案**：
+1. 检查后端是否正确启动
+2. 确保在正确的 Python 环境中运行（推荐 Conda 环境）
+3. 验证 camoufox 已安装：`python -m camoufox fetch`
+4. 查看 `backend.log` 中的 Solver 日志
 
-### Port Occupied
+### 端口被占用
 
-**Symptoms**: Service fails to start, port 8000 already in use
+**症状**：服务启动失败，端口 8000 已被占用
 
-**Solutions**:
+**解决方案**：
 ```bash
-# Stop existing service
+# 停止现有服务
 pkill -f "python main.py"
 
-# Or find and kill specific process
+# 或查找并终止特定进程
 lsof -i :8000
 kill <PID>
 
-# Restart service
+# 重启服务
 python main.py
 ```
 
-### Email Service Failure
+### 邮箱服务失败
 
-**Symptoms**: Cannot receive verification codes
+**症状**：无法接收验证码
 
-**Solutions**:
-1. Check proxy configuration and network connection
-2. Some services require proxy access
-3. Verify API keys are correct
-4. Try alternative email service
+**解决方案**：
+1. 检查代理配置和网络连接
+2. 部分服务需要代理访问
+3. 验证 API Key 是否正确
+4. 尝试其他邮箱服务
 
-### Registration Disallowed (ChatGPT)
+### 注册被拒绝（ChatGPT）
 
-**Error**: `registration_disallowed` or HTTP 400
+**错误**：`registration_disallowed` 或 HTTP 400
 
-**Solutions**:
-1. 🔄 **Change proxy IP** (current IP may be flagged, use residential proxy)
-2. 📧 **Change email provider** (temporary email domains may be blacklisted)
-3. ⏱️ **Reduce registration frequency** (add 30-60s random delay)
-4. 🔃 **Clear browser data** or change device fingerprint
-5. 📋 **Reduce batch size** (max 5 accounts per batch recommended)
+**解决方案**：
+1. 🔄 **更换代理 IP**（当前 IP 可能被标记，建议使用住宅代理）
+2. 📧 **更换邮箱服务商**（临时邮箱域名可能已被拉黑）
+3. ⏱️ **降低注册频率**（增加 30-60 秒随机延迟）
+4. 🔃 **清除浏览器数据**或更换设备指纹
+5. 📋 **减少批量大小**（建议每批最多 5 个账号）
 
-### Registration Quantity Limit
+### 注册数量限制
 
-- Maximum: 1000 accounts per batch
-- Recommended: Use random delay (10-30s)
-- Best Practice: 5-10 accounts per batch with 30-60s delay
+- 最大值：每批 1000 个账号
+- 建议：使用随机延迟（10-30 秒）
+- 最佳实践：每批 5-10 个账号，延迟 30-60 秒
 
-### TLS/SSL Errors
+### TLS/SSL 错误
 
-**Symptoms**: Connection errors during registration
+**症状**：注册期间连接错误
 
-**Solutions**:
-1. Check proxy availability
-2. Update dependencies: `pip install -r requirements.txt --upgrade`
-3. Reinstall browsers: `python -m playwright install chromium`
+**解决方案**：
+1. 检查代理是否可用
+2. 更新依赖：`pip install -r requirements.txt --upgrade`
+3. 重新安装浏览器：`python -m playwright install chromium`
 
 ---
 
-## 🛠️ Development Guide
+## 🛠️ 开发指南
 
-### Add New Platform
+### 添加新平台
 
-1. Create new platform plugin in `platforms/` directory
-2. Implement `BasePlatform` interface
-3. Register with `@register` decorator
+1. 在 `platforms/` 目录创建新平台插件
+2. 实现 `BasePlatform` 接口
+3. 使用 `@register` 装饰器注册
 
-Example:
+示例：
 ```python
 from core.registry import register, BasePlatform
 
@@ -481,39 +483,39 @@ class MyPlatform(BasePlatform):
     display_name = "My Platform"
     
     async def register(self, config):
-        # Implementation
+        # 实现代码
         pass
 ```
 
-### Frontend Development
+### 前端开发
 
 ```bash
 cd frontend
 
-# Install dependencies
+# 安装依赖
 npm install
 
-# Start development server
+# 启动开发服务器
 npm run dev
 
-# Access http://localhost:5173
+# 访问 http://localhost:5173
 
-# Build for production
+# 生产环境构建
 npm run build
 ```
 
-### Backend Development
+### 后端开发
 
 ```bash
-# Activate Conda environment
+# 激活 Conda 环境
 conda activate any-auto-register
 
-# Start with auto-reload
+# 启动自动重载
 export APP_RELOAD=1
 python main.py
 ```
 
-### Running Tests
+### 运行测试
 
 ```bash
 pytest tests/
@@ -521,98 +523,98 @@ pytest tests/
 
 ---
 
-## 🐳 Docker Deployment
+## 🐳 Docker 部署
 
-### Prerequisites
+### 环境要求
 
 - Docker 20.10+
 - Docker Compose 2.0+
 
-### Quick Start
+### 快速开始
 
 ```bash
-# Build and start
+# 构建并启动
 docker-compose up -d
 
-# View logs
+# 查看日志
 docker-compose logs -f
 
-# Stop service
+# 停止服务
 docker-compose down
 ```
 
-### Environment Variables
+### 环境变量
 
 ```bash
-# Configure in docker-compose.yml or .env
+# 在 docker-compose.yml 或 .env 中配置
 SOLVER_BROWSER_TYPE=camoufox
 CLIPROXYAPI_PORT_BIND=8317
 GROK2API_PORT_BIND=8011
 ```
 
-### Volume Mounts
+### 卷挂载
 
-| Host Path | Container Path | Description |
-|-----------|----------------|-------------|
-| `./data` | `/runtime` | Runtime data |
-| `./_ext_targets` | `/_ext_targets` | External targets |
-| `./external_logs` | `/app/services/external_logs` | External logs |
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! Please follow these guidelines:
-
-### Before Contributing
-1. Ensure code follows project conventions
-2. Remove any sensitive information
-3. Follow the original project's open source license
-
-### How to Contribute
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-### Reporting Issues
-- Use GitHub Issues for bug reports and feature requests
-- Provide detailed information including:
-  - Steps to reproduce
-  - Expected behavior
-  - Actual behavior
-  - Environment information (OS, Python version, etc.)
+| 主机路径 | 容器路径 | 说明 |
+|---------|---------|------|
+| `./data` | `/runtime` | 运行时数据 |
+| `./_ext_targets` | `/_ext_targets` | 外部目标 |
+| `./external_logs` | `/app/services/external_logs` | 外部日志 |
 
 ---
 
-## 📄 License
+## 🤝 贡献指南
+
+欢迎贡献！请遵循以下指南：
+
+### 贡献前
+1. 确保代码符合项目规范
+2. 不包含任何敏感信息
+3. 遵循原项目的开源协议
+
+### 如何贡献
+1. Fork 本仓库
+2. 创建特性分支（`git checkout -b feature/amazing-feature`）
+3. 提交更改（`git commit -m 'Add amazing feature'`）
+4. 推送到分支（`git push origin feature/amazing-feature`）
+5. 提交 Pull Request
+
+### 报告问题
+- 使用 GitHub Issues 报告 bug 和提出功能请求
+- 请提供详细信息，包括：
+  - 复现步骤
+  - 预期行为
+  - 实际行为
+  - 环境信息（操作系统、Python 版本等）
+
+---
+
+## 📄 许可证
 
 **MIT License**
 
-See [LICENSE](LICENSE) and [NOTICE](NOTICE) files for details.
+详见 [LICENSE](LICENSE) 和 [NOTICE](NOTICE) 文件。
 
-### Copyright Holders
-- Copyright (c) 2024-present dsclca12 (Current Maintainer)
-- Copyright (c) 2024 zc-zhangchen (Second Fork Author)
-- Copyright (c) 2024 lxf746 (Original Author)
+### 版权所有者
+- Copyright (c) 2024-present dsclca12（当前维护者）
+- Copyright (c) 2024 zc-zhangchen（二开作者）
+- Copyright (c) 2024 lxf746（一开作者）
 
-### Upstream Projects
-- [lxf746/any-auto-register](https://github.com/lxf746/any-auto-register) - Original Project (MIT)
-- [zc-zhangchen/any-auto-register](https://github.com/zc-zhangchen/any-auto-register) - Second Fork (MIT)
+### 上游项目
+- [lxf746/any-auto-register](https://github.com/lxf746/any-auto-register) - 一开项目（MIT）
+- [zc-zhangchen/any-auto-register](https://github.com/zc-zhangchen/any-auto-register) - 二开项目（MIT）
 
-### Additional Terms
-This project is for **learning and research purposes only**. It shall not be used for any commercial or illegal purposes. See [LICENSE](LICENSE) for full disclaimer.
+### 附加条款
+本项目仅供**学习和技术研究使用**，不得用于任何商业用途或非法用途。完整免责声明见 [LICENSE](LICENSE) 文件。
 
 ---
 
-## ☕ Support & Donations
+## ☕ 支持与捐赠
 
-If this project helps you, consider buying me a coffee to support development and maintenance. Every donation is appreciated! 💖
+如果本项目对你有帮助，可以考虑请我喝杯咖啡，支持项目的持续开发和维护！💖
 
-| WeChat Pay | Alipay |
-|------------|--------|
-| <img src="mm_facetoface_collect_qrcode_1775206373527.png" width="200" alt="WeChat Pay" /> | <img src="mm_facetoface_collect_qrcode_1775206373527.png" width="200" alt="Alipay" /> |
+| 微信支付 | 支付宝 |
+|---------|--------|
+| <img src="mm_facetoface_collect_qrcode_1775206373527.png" width="200" alt="微信支付" /> | <img src="mm_facetoface_collect_qrcode_1775206373527.png" width="200" alt="支付宝" /> |
 
 ---
 
@@ -622,22 +624,22 @@ If this project helps you, consider buying me a coffee to support development an
 
 ---
 
-## 📞 Contact
+## 📞 联系方式
 
-- 📧 **Email**: dev@example.com
-- 💬 **Issues**: [GitHub Issues](https://github.com/dsclca12/auto_reg/issues)
-- 🌟 **Repository**: [GitHub](https://github.com/dsclca12/auto_reg)
+- 📧 **邮箱**：dev@example.com
+- 💬 **Issues**：[GitHub Issues](https://github.com/dsclca12/auto_reg/issues)
+- 🌟 **仓库**：[GitHub](https://github.com/dsclca12/auto_reg)
 
 ---
 
-## 👥 Authors
+## 👥 作者
 
-- **Current Maintainer**: [@dsclca12](https://github.com/dsclca12)
-- **Original Author**: [@lxf746](https://github.com/lxf746)
-- **Second Fork Author**: [@zc-zhangchen](https://github.com/zc-zhangchen)
+- **当前维护者**：[@dsclca12](https://github.com/dsclca12)
+- **一开作者**：[@lxf746](https://github.com/lxf746)
+- **二开作者**：[@zc-zhangchen](https://github.com/zc-zhangchen)
 
 ---
 
 <p align="center">
-  <strong>⚠️ Reminder: Please use this project legally and responsibly. The author is not responsible for any misuse.</strong>
+  <strong>⚠️ 再次提醒：请合法合规使用本项目，作者不对任何滥用行为负责</strong>
 </p>
